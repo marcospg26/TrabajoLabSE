@@ -138,7 +138,8 @@ architecture Behavioral of class is
     
     -- (T)ree (N)ode data
     signal tn_feature: std_logic_vector(7 downto 0);
-    signal tn_cmp_value, tn_pred_value: std_logic_vector(15 downto 0);
+    signal tn_pred_value: std_logic_vector(15 downto 0);
+    signal tn_cmp_value: std_logic_vector(12 downto 0);
     signal tn_next_tree: std_logic_vector(TREE_RAM_BITS - 1 downto 0);
     signal tn_next_node: std_logic_vector(TREE_RAM_BITS - 1 downto 0);
     signal tn_right_child, addr_jmp: std_logic_vector(6 downto 0);
@@ -262,7 +263,7 @@ begin
                  Dout  => tdr_dout);
     
     -- Non-leaf node fields
-    tn_cmp_value   <= tdr_dout(23 downto 8);
+    tn_cmp_value   <= tdr_dout(20 downto 8);
     tn_right_child <= tdr_dout(7 downto 1);
     tn_is_leaf     <= tdr_dout(0);
     
