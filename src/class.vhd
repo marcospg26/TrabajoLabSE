@@ -142,7 +142,7 @@ architecture Behavioral of class is
     signal tn_cmp_value: std_logic_vector(13 downto 0);
     signal tn_next_tree: std_logic_vector(TREE_RAM_BITS - 1 downto 0);
     signal tn_next_node: std_logic_vector(TREE_RAM_BITS - 1 downto 0);
-    signal tn_right_child: std_logic_vector(6 downto 0);
+    signal tn_right_child: std_logic_vector(5 downto 0);
     signal addr_jmp: std_logic_vector(6 downto 0);
     signal tn_is_leaf, tn_last_tree: std_logic;
     
@@ -265,7 +265,7 @@ begin
     
     -- Non-leaf node fields
     tn_cmp_value   <= tdr_dout(21 downto 8);
-    tn_right_child <= tdr_dout(7 downto 1);
+    tn_right_child <= tdr_dout(6 downto 1);
     tn_is_leaf     <= tdr_dout(0);
     
     -- Leaf node fields
@@ -296,8 +296,8 @@ begin
     -- Mux to choose between the two children of the node
     --     left child  --> add 1 to the current address
     --     right child --> add 'tn_right_child' to the current address
-    addr_jmp <= "0000001" when cmp_dout = '0' else tn_right_child;
-    -- addr_jmp <= "0000001" when cmp_dout = '0' else '0' & tn_right_child;
+    -- addr_jmp <= "0000001" when cmp_dout = '0' else tn_right_child;
+    addr_jmp <= "0000001" when cmp_dout = '0' else '0' & tn_right_child;
 
     tn_next_node <= std_logic_vector(unsigned(last_addr_2)
                                      + unsigned(addr_jmp));
