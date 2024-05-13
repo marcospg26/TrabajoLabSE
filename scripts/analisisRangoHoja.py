@@ -37,6 +37,12 @@ input_file_path = os.path.join(current_directory, 'nodosHoja.txt')
 # Llamar a la función para extraer y analizar los bits
 max_min_2_to_15, max_min_16_to_31 = extract_bits_and_analyze(input_file_path)
 
+# Función para convertir un entero a una cadena hexadecimal con formato
+def int_to_hex_string(number):
+    return hex(number)
+
 # Imprimir resultados
-print("Máximo y mínimo en los bits del 2 al 15 (dirección del siguiente árbol):", max_min_2_to_15)
-print("Máximo y mínimo en los bits del 16 al 31 (valor de la hoja):", max_min_16_to_31)
+print("Máximo y mínimo en los bits del 2 al 15 (dirección del siguiente árbol):", 
+      (int_to_hex_string(max_min_2_to_15[0]), int_to_hex_string(max_min_2_to_15[1])))
+print("Máximo y mínimo en los bits del 16 al 31 (valor de la hoja):", 
+        (int_to_hex_string(max_min_16_to_31[0]), int_to_hex_string(max_min_16_to_31[1])))
