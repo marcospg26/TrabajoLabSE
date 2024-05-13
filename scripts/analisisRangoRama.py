@@ -51,8 +51,16 @@ input_file_path = os.path.join(current_directory, 'nodosRama.txt')
 # Llamar a la función para extraer y analizar los bits
 max_min_8_to_23, max_min_1_to_7, max_min_24_to_31 = extract_bits_and_analyze(input_file_path)
 
-# Imprimir resultados
-print("Máximo y mínimo en los bits del 1 al 7 (dist. nodo derch.):", max_min_1_to_7)
-print("Máximo y mínimo en los bits del 8 al 23 (valor cmp):", max_min_8_to_23)
-print("Máximo y mínimo en los bits del 24 al 31 (feature):", max_min_24_to_31)
+# Función para convertir un entero a una cadena hexadecimal con formato
+def int_to_hex_string(number):
+    return hex(number)
+
+# Imprimir resultados en hexadecimal
+print("Máximo y mínimo en los bits del 1 al 7 (dist. nodo derch.):",
+      (int_to_hex_string(max_min_1_to_7[0]), int_to_hex_string(max_min_1_to_7[1])))
+print("Máximo y mínimo en los bits del 8 al 23 (valor cmp):",
+      (int_to_hex_string(max_min_8_to_23[0]), int_to_hex_string(max_min_8_to_23[1])))
+print("Máximo y mínimo en los bits del 24 al 31 (feature):",
+      (int_to_hex_string(max_min_24_to_31[0]), int_to_hex_string(max_min_24_to_31[1])))
+
 
