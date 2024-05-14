@@ -10,6 +10,7 @@ def extract_bits_and_analyze(input_file):
         for line in f:
             # Convertir el número hexadecimal a entero
             hex_number = int(line.strip(), 16)
+            
             # Extraer los bits del 2 al 15 (incluidos)
             bits_2_to_15 = (hex_number >> 2) & 0x3FFF
             # Actualizar el máximo y mínimo para los bits del 2 al 15
@@ -20,6 +21,9 @@ def extract_bits_and_analyze(input_file):
             
             # Extraer los bits del 16 al 31 (incluidos)
             bits_16_to_31 = (hex_number >> 16) & 0xFFFF
+            # Interpretar los bits del 16 al 31 como un valor con signo de 16 bits
+            if bits_16_to_31 & 0x8000:
+                bits_16_to_31 -= 0x10000
             # Actualizar el máximo y mínimo para los bits del 16 al 31
             if max_val_16_to_31 is None or bits_16_to_31 > max_val_16_to_31:
                 max_val_16_to_31 = bits_16_to_31
@@ -45,4 +49,4 @@ def int_to_hex_string(number):
 print("Máximo y mínimo en los bits del 2 al 15 (dirección del siguiente árbol):", 
       (int_to_hex_string(max_min_2_to_15[0]), int_to_hex_string(max_min_2_to_15[1])))
 print("Máximo y mínimo en los bits del 16 al 31 (valor de la hoja):", 
-        (int_to_hex_string(max_min_16_to_31[0]), int_to_hex_string(max_min_16_to_31[1])))
+      (max_min_16_to_31[0], max_min_16_to_31[1]))
