@@ -31,6 +31,30 @@ acelerador en aplicaciones de aprendizaje automático.
 
 # Resultados obtenidos
 
+La precision del diseño de palabra original para las diferentes clases en el 
+`IP_test` era la siguiente:
+
+Los resultados de rendimiento obtenidos para cada uno es de:
+
+  |   clase   |  nº pixels  |  nº aciertos  |  % precision  |
+  |:---------:|:-----------:|:-------------:|:-------------:|
+  |     1     |     1214    |      868      |       71      |
+  |     2     |      706    |      457      |       64      |
+  |     3     |      202    |       93      |       46      |
+  |     4     |      411    |      358      |       87      |
+  |     5     |      621    |      559      |       90      |
+  |     6     |       24    |        3      |       12      |
+  |     7     |      407    |      398      |       97      |
+  |     8     |       17    |        1      |        5      |
+  |     9     |      827    |      718      |       86      |
+  |    10     |     2087    |               |               |
+  |    11     |      505    |      295      |       58      |
+  |    12     |      175    |      162      |       92      |
+  |    13     |     1076    |     1030      |       95      |
+  |    14     |      329    |      206      |       62      |
+  |    15     |       80    |       70      |       87      |
+
+
 # Bibliografia
 Trabajo de Adrián Alcolea:
 https://www.mdpi.com/2079-9292/10/3/314

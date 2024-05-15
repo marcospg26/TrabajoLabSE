@@ -139,7 +139,8 @@ architecture Behavioral of class is
     -- (T)ree (N)ode data
     signal tn_feature: std_logic_vector(7 downto 0);
     signal tn_pred_value: std_logic_vector(15 downto 0);
-    signal tn_cmp_value: std_logic_vector(15 downto 0);
+    signal tn_cmp_value: std_logic_vector(5 downto 0);
+    signal tn_cmp_value_extended : std_logic_vector(13 downto 0);
     signal tn_next_tree: std_logic_vector(TREE_RAM_BITS - 1 downto 0);
     signal tn_next_node: std_logic_vector(TREE_RAM_BITS - 1 downto 0);
     signal tn_right_child: std_logic_vector(5 downto 0);
@@ -264,7 +265,7 @@ begin
                  Dout  => tdr_dout);
     
     -- Non-leaf node fields
-    tn_cmp_value   <= tdr_dout(23 downto 8);
+    tn_cmp_value   <= tdr_dout(21 downto 16);
     tn_right_child <= tdr_dout(6 downto 1);
     tn_is_leaf     <= tdr_dout(0);
     
@@ -291,9 +292,8 @@ begin
                  Dout  => fr_dout);
     
     -- Feature value comparation
-    cmp_dout <= '0' when (signed(fr_dout) <= signed(tn_cmp_value)) else '1';
-    -- cmp_dout <= '0' when (signed(fr_dout(12 downto 0)) <= signed(tn_cmp_value)) else '1';
-
+    tn_cmp_value_extended <= tn_cmp_value & "00000000";
+    cmp_dout <= '0' when (signed(fr_dout) <= signed(tn_cmp_value_extended)) else '1';
     
     -- Mux to choose between the two children of the node
     --     left child  --> add 1 to the current address
