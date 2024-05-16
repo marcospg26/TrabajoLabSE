@@ -138,7 +138,8 @@ architecture Behavioral of class is
     
     -- (T)ree (N)ode data
     signal tn_feature: std_logic_vector(7 downto 0);
-    signal tn_pred_value: std_logic_vector(13 downto 0);
+    signal tn_pred_value: std_logic_vector(1 downto 0);
+    signal tn_pred_value_extended: std_logic_vector(15 downto 0);
     -- signal tn_cmp_value: std_logic_vector(5 downto 0);
     -- signal tn_cmp_value_extended : std_logic_vector(13 downto 0);
     signal tn_cmp_value: std_logic_vector(13 downto 0);
@@ -272,7 +273,7 @@ begin
     tn_is_leaf     <= tdr_dout(0);
     
     -- Leaf node fields
-    tn_pred_value <= tdr_dout(29 downto 16);
+    tn_pred_value <= tdr_dout(31 downto 30);
     tn_next_tree  <= tdr_dout((TREE_RAM_BITS + 2) - 1  downto 2);
     tn_last_tree  <= tdr_dout(1);
     
@@ -320,8 +321,9 @@ begin
                  Dout  => res_dout);
     
     -- The content of the register is accumulated with the next prediction
+    tn_pred_value_extended <= tn_pred_value & "00000000000000";
     res_din <= std_logic_vector(signed(res_dout)
-                                + resize(signed(tn_pred_value), 32));
+                                + resize(signed(tn_pred_value_extended), 32));
     
     -- Registers to keep the finish signal of each thread
     finish_group_reg_1: reg
